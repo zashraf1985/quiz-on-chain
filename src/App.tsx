@@ -5,7 +5,7 @@ import { Quiz } from './components/quiz';
 import { useRef, useState } from 'react';
 import { ChallengeInfo, QuestionInfo, QuizResult, QuizType } from './types';
 import { generateBasicAdditionQuiz } from './quiz_generator';
-import { randomIntFromInterval } from './utils';
+import { randomIntFromInterval, serializeChallengeInfo } from './utils';
 
 function App() {
   const [isQuizActive, setIsQuizActive] = useState<boolean>(false);
@@ -25,6 +25,7 @@ function App() {
 
   const onCompleteHandler = (quizResult: QuizResult) => {
     console.log(quizResult);
+    console.log(serializeChallengeInfo(quizResult.challengInfo!));
     setIsQuizActive(false);
     if (quizResult.quizType == QuizType.FIRST_PLAY) {
       challenges.current = [...challenges.current, quizResult.challengInfo!];
